@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Elegant Image Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="gallery-header">
+        <h1>Moments</h1>
+        <p>Curate your aesthetic</p>
+        
+        <div class="controls">
+            <label for="image-upload" class="upload-btn">✦ Add Image</label>
+            <input type="file" id="image-upload" accept="image/*" style="display: none;">
+        </div>
+    </header>
+
+    <main class="gallery-container">
+        <div class="gallery-grid" id="gallery-grid">
+            <img src="https://picsum.photos/id/1015/800/800" alt="Landscape" class="gallery-item">
+            <img src="https://picsum.photos/id/1018/800/800" alt="Nature" class="gallery-item">
+            <img src="https://picsum.photos/id/1022/800/800" alt="Night Sky" class="gallery-item">
+            <img src="https://picsum.photos/id/1036/800/800" alt="Mountains" class="gallery-item">
+            <img src="https://picsum.photos/id/1043/800/800" alt="Forest" class="gallery-item">
+            <img src="https://picsum.photos/id/1047/800/800" alt="City" class="gallery-item">
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-controls">
+            <button id="download-btn" class="icon-btn" title="Download Image">⬇</button>
+            <button id="close-btn" class="icon-btn close-btn" title="Close">✕</button>
+        </div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Enlarged view">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+:root {
+    --bg-light: #FCFFFA;
+    --bg-pink: #EAADC6;
+    --potion-pink: #E07EA7;
+    --text-main: #2c2c2c;
+    --text-muted: #6b6b6b;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-heavy: rgba(252, 255, 250, 0.85);
+    --shadow: rgba(224, 126, 167, 0.2);
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-pink) 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* Improves touch interactions on mobile */
+    -webkit-tap-highlight-color: transparent; 
+}
+
+.gallery-header { text-align: center; padding: 50px 20px 30px; }
+.gallery-header h1 { font-weight: 300; font-size: 3.5rem; margin: 0 0 5px 0; color: var(--potion-pink); }
+.gallery-header p { color: var(--text-muted); margin: 0 0 25px 0; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; }
+
+.upload-btn {
+    display: inline-block; background: var(--glass-bg); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6); padding: 12px 25px; border-radius: 30px;
+    color: var(--potion-pink); font-weight: 500; cursor: pointer; transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow);
+}
+.upload-btn:hover { background: var(--potion-pink); color: white; transform: translateY(-2px); }
+
+.gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; box-sizing: border-box; }
+
+/* Desktop Grid: min 250px columns */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px;
+    cursor: pointer; box-shadow: 0 8px 20px var(--shadow);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+/* Disable hover effect on touch devices to prevent sticky states */
+@media (hover: hover) {
+    .gallery-item:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 15px 30px rgba(224, 126, 167, 0.4); }
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--glass-heavy); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.lightbox.active { opacity: 1; pointer-events: auto; }
+
+.lightbox-content { max-width: 95%; max-height: 90vh; transform: scale(0.95); transition: transform 0.3s ease; }
+.lightbox.active .lightbox-content { transform: scale(1); }
+.lightbox-content img { width: 100%; height: 100%; max-height: 85vh; object-fit: contain; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+
+/* Controls */
+.lightbox-controls { position: absolute; top: 25px; right: 30px; display: flex; gap: 15px; z-index: 1001; }
+.icon-btn {
+    background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(255,255,255,0.8);
+    color: var(--potion-pink); border-radius: 50%; width: 50px; height: 50px;
+    font-size: 1.5rem; cursor: pointer; display: flex; justify-content: center; align-items: center;
+    transition: all 0.2s; backdrop-filter: blur(5px);
+}
+.icon-btn:hover { background: var(--potion-pink); color: white; transform: scale(1.1); }
+
+
+/* =========================================
+   📱 MOBILE & TABLET RESPONSIVE RULES 
+   ========================================= */
+@media (max-width: 768px) {
+    .gallery-header { padding: 40px 15px 20px; }
+    .gallery-header h1 { font-size: 2.5rem; }
+    
+    .gallery-container { padding: 0 10px 40px; }
+    
+    /* Mobile Grid: Forces a 2-column layout (min 140px) with smaller gaps */
+    .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .gallery-item { border-radius: 12px; }
+
+    /* Shrink the lightbox buttons and move them inward so they fit on phones */
+    .lightbox-controls { top: 15px; right: 15px; gap: 10px; }
+    .icon-btn { width: 40px; height: 40px; font-size: 1.2rem; }
+    
+    /* Make sure the image uses all available width on small screens */
+    .lightbox-content { max-width: 100%; padding: 0 10px; box-sizing: border-box; }
+}
